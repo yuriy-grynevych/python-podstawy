@@ -1,12 +1,173 @@
-# Python – Zbiory i Słowniki
+# Python – Podstawy
 
 Materiały z zajęć – Katedra Systemów Obliczeniowych (29.03.2026)
 
 ## Zawartość repozytorium
 
-| Plik                      | Temat                                    |
-|---------------------------|------------------------------------------|
-| `zbiory_i_slowniki.py`    | Kompletny przykład zbiorów i słowników   |
+| Plik                      | Temat                                                              |
+|---------------------------|--------------------------------------------------------------------|
+| `typy_petle_listy.py`     | Typy danych, stringi, warunki, pętle for/while, listy, krotki     |
+| `zbiory_i_slowniki.py`    | Zbiory (set) i słowniki (dict)                                     |
+
+---
+
+## TYPY DANYCH
+
+```python
+i = 5          # int
+cena = 2.5     # float
+c = 2 + 5j     # complex
+b = True       # bool
+s = "Tekst"    # str
+n = None       # NoneType
+```
+
+Sprawdzanie typu: `isinstance(i, int)` → `True`
+
+### Konwersja typów
+
+```python
+int(True)    # 1
+float(False) # 0.0
+str(True)    # 'True'
+bool(0)      # False
+bool("")     # False  – pusty string to False
+bool("abc")  # True   – niepusty string to True
+bool(None)   # False
+```
+
+---
+
+## STRINGI (`str`)
+
+### Tworzenie
+
+```python
+s1 = 'tekst jednoliniowy'
+s2 = """tekst
+wieloliniowy"""
+s3 = 'tekst z\nnową linią'
+```
+
+### Formatowanie
+
+```python
+print('wartość: %.1f' % cena)             # stary styl
+print(s1.format("Katarzyna", 18))         # .format()
+print(f'{x} + {y} = {x+y}')              # f-string (zalecane)
+```
+
+### Metody
+
+| Metoda              | Opis                              |
+|---------------------|-----------------------------------|
+| `s.upper()`         | Wielkie litery (oryginał bez zmian) |
+| `s.lower()`         | Małe litery (oryginał bez zmian)  |
+| `s.replace(a, b)`   | Zamienia `a` na `b`; można łączyć: `.replace(...).replace(...)` |
+
+---
+
+## WARUNKI
+
+```python
+if i < 0:
+    print("ujemna")
+elif i == 0:
+    pass          # nic nie rób
+else:
+    print("dodatnia")
+```
+
+---
+
+## PĘTLE
+
+### `for` z `range()`
+
+```python
+for i in range(1, n+1):    # od 1 do n włącznie
+    factorial *= i
+
+for i in range(2, n):
+    if n % i == 0:
+        print("nie pierwsza"); break
+else:
+    print("pierwsza")      # else wykonuje się gdy pętla skończyła się BEZ break
+```
+
+Instrukcje sterujące:
+- `break` – przerywa pętlę
+- `continue` – przechodzi do następnej iteracji
+
+### `while`
+
+```python
+while n > 0:
+    factorial *= n
+    n -= 1
+
+while i < n:
+    if n % i == 0:
+        print("nie pierwsza"); break
+    i += 1
+else:
+    print("pierwsza")      # else jak w for – gdy brak break
+```
+
+---
+
+## LISTY (`list`)
+
+### Tworzenie i dostęp
+
+```python
+list1 = ["ala", "ola", "krzys", "kubus"]
+list1[0]      # pierwszy element
+list1[-1]     # ostatni
+list1[1:-1]   # slice (bez pierwszego i ostatniego)
+```
+
+### Iterowanie
+
+```python
+for n in list1:   print(n)   # po jednym
+print(*list1)                # wszystkie w jednej linii
+```
+
+### Modyfikacja
+
+| Operacja                  | Opis                                        |
+|---------------------------|---------------------------------------------|
+| `list1[1] = "ania"`       | Zmiana elementu na indeksie                 |
+| `list1.append(x)`         | Dodaje na koniec                            |
+| `list1.insert(i, x)`      | Wstawia na pozycję `i`                      |
+| `list1.remove(x)`         | Usuwa pierwsze wystąpienie `x`              |
+| `list1.pop()`             | Usuwa i zwraca ostatni element              |
+| `list1.pop(i)`            | Usuwa i zwraca element z indeksu `i`        |
+| `list1.clear()`           | Czyści listę → `[]`                         |
+| `del list1`               | Usuwa zmienną                               |
+| `list1.copy()`            | Niezależna kopia                            |
+| `list1 + list2`           | Łączenie list                               |
+| `list1.sort()`            | Sortowanie rosnąco                          |
+| `list1.sort(reverse=True)`| Sortowanie malejąco                         |
+| `list1.count(x)`          | Liczba wystąpień `x`                        |
+| `list1.index(x)`          | Indeks pierwszego wystąpienia `x`           |
+
+> `list2 = list1` → referencja (zmiany widać w obu)
+> `list2 = list1.copy()` → niezależna kopia
+
+---
+
+## KROTKI (`tuple`)
+
+```python
+tuple1 = ("ala", "ola", "krzys", "kubus")
+tuple1[0]     # pierwszy element
+tuple1[-1]    # ostatni
+tuple1[1:-1]  # slice
+```
+
+Krotka jest **niemutowalna** – po utworzeniu nie można zmieniać jej elementów.
 
 ---
 
@@ -152,5 +313,6 @@ print(json.dumps(slownik, indent=4, ensure_ascii=False))
 ## Uruchomienie
 
 ```bash
+python typy_petle_listy.py
 python zbiory_i_slowniki.py
 ```
